@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+
+    <style>
+        canvas{
+            border: solid 2px;
+            
+        }
+        div{
+            width: 20px;
+            height: 20px;
+            border: solid 1px;
+        }
+        main{
+            display: flex;
+        }
+        #red{
+            background-color: red;
+        }
+        #green{
+            background-color: green;
+        }
+        #blue{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Canvas</h1>
+<main>
+    <canvas id="canvas" width="400px" height="500px"></canvas>
+    
+    <article>
+        <div id ="red"></div>
+        <div id = "blue"></div>
+        <div id = "green"></div>
+     </article>
+</main>
+
+
+
+    <script>
+        const canvas = document.getElementById("canvas")
+
+        const redEl = document.getElementById("red")
+        const greenEl = document.getElementById("green")
+        const blueEl = document.getElementById("blue")
+
+        let ctx = canvas.getContext("2d")
+
+        let redValue
+        let greenValue
+        let blueValue
+
+        let color
+        let peker = false
+
+        redEl.addEventListener("mousedown", function(){
+            color = "red"
+        })
+        blueEl.addEventListener("mousedown", function(){
+            color = "blue"
+        })
+        greenEl.addEventListener("mousedown", function(){
+            color = "green"
+        })
+
+        canvas.addEventListener("mousedown", function(){
+            console.log("activ")
+            peker = true
+        })
+        canvas.addEventListener("mouseup", function(){
+            console.log("inaktic")
+            peker = false
+        })
+
+        function tegne(e){
+            
+
+            console.log(e)
+            let x = e.offsetX
+            let y = e.offsetY
+            let r = 10
+
+            if (peker){
+                ctx.beginPath()
+
+                ctx.arc(x, y, r, 0, 2*Math.PI)
+                ctx.fillStyle = color
+                
+                ctx.fill()
+
+                ctx.stroke()
+
+            }
+
+
+            
+
+        }
+        canvas.addEventListener("mousemove", tegne)
+
+        
+
+        
+
+        /* canvas.addEventListener("mousedown", function(){
+                redValue = Math.floor(Math.random()*256)
+                greenValue = Math.floor(Math.random()*256)
+                blueValue = Math.floor(Math.random()*256)
+
+                ctx.fillStyle = `rgb(${redValue}, ${greenValue}, ${blueValue})`
+                ctx.fill()
+                
+                
+            }) */
+
+        /* function tegnSirkel(e){
+            ctx.clearRect(0, 0, canvas.width, canvas.height) 
+            ctx.beginPath()
+
+            let x = e.offsetX
+            let y = e.offsetY
+            let r = 20
+
+            ctx.arc(x, y, r, 0, 2*Math.PI)
+            ctx.fill()
+
+            ctx.stroke()
+
+            }
+
+            canvas.addEventListener("mousemove", tegnSirkel)
+
+        } */
+
+        
+
+        
+
+        
+
+        
+    </script>
+</body>
+</html>
